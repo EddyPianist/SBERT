@@ -3,6 +3,8 @@ from torch.utils.data import DataLoader, Dataset
 from transformers import AutoTokenizer
 import torch
 
+#The Stanford Natural Language Inference (SNLI) dataset is used for training our model, containing 570,000 human-annotated sentence pairs.
+#Each pair consists of a premise and a hypothesis, labeled as entailment, contradiction, or neutral
 
 # Load BERT tokenizer
 tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
