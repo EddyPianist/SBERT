@@ -5,9 +5,9 @@ This project implements Sentence-BERT (SBERT) and modifies it into a multi-task 
 ## Installation
 
 ### Step 1: Create a Conda Environment
-Run the following command to create a Conda environment with Python 3.8:
+Run the following command to create a Conda environment with Python 3.10:
 ```sh
-conda create -n myenv python=3.8
+conda create -n myenv python=3.10
 ```
 
 ### Step 2: Install Dependencies
@@ -50,6 +50,7 @@ We consider different scenarios for freezing parts of the network:
 ## Task 4: Training Loop Implementation
 - The training process is implemented in `train.py`.
 - A small dataset is loaded using a customized data loader for demonstration purposes.
+- The training supposes to take less than 1 min because only 1000 samples are used for training. 
 
 ## Summary
 This project provides a modular implementation of Sentence-BERT with a multi-task objective. The model supports classification and regression tasks while allowing different transfer learning strategies to improve performance. The training setup ensures flexibility for various applications.
