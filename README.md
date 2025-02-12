@@ -34,7 +34,7 @@ python train.py
   1. **Classification Objective Function**: Sentence embeddings `u` and `v` are concatenated along with their element-wise absolute difference `|u − v|`. The resulting vector is then multiplied with a trainable weight.
   2. **Regression Objective Function**: Computes the cosine similarity between sentence embeddings `u` and `v`, using mean-squared error (MSE) loss as the objective function.
 
-## Task 3: Transfer Learning and Model Freezing Strategies
+## Task 3: Training Considerations
 We consider different scenarios for freezing parts of the network:
 1. **Freezing the entire network**: Used for evaluation purposes, ensuring model weights remain unchanged.
 2. **Freezing only the Transformer backbone**: Allows fine-tuning of task-specific layers while keeping the base model stable. In our specific senario, the cosine similarity fully depended on the sentence embeddings from the backbone, so if we find out the loss of the Regression Objective Function is low while Classification Objective Function is high, we can use this strategy. 
@@ -47,7 +47,7 @@ We consider different scenarios for freezing parts of the network:
   - Freezing most layers except the last few provides a balance between efficiency and flexibility.
   - Fine-tuning the entire model yields the best results but requires comparatively great amount of computational resources.
 
-## Task 4: Training and Data Loading
+## Task 4: Training Loop Implementation
 - The training process is implemented in `train.py`.
 - A small dataset is loaded using a customized data loader for demonstration purposes.
 
