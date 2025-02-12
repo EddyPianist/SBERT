@@ -1,18 +1,58 @@
-# SBERT
- Implement the Sentence BERT and modify it into a multi-task model
+# Sentence BERT: Multi-Task Model Implementation
 
- ##Task 1:
+This project implements Sentence-BERT (SBERT) and modifies it into a multi-task model.
 
-The code can be found in BERT.py. The model structure is almost the same as original transformer structure except that there is a average pooling layer in the end which transfer multiple verious-length token embeddings into one sentence embedding. (The dimension remains the same.) The hyperparams are exactly the same as BERT-based in this work: https://arxiv.org/pdf/1810.04805. 
+## Installation
 
- ##Task 2:
-The code can be found in multi_task_output.py. Modify the forward path of the original Sentence which concludes two objective function: 1. Classification Objective Function:  concatenate the sentence embeddings u and v with the element-wise difference |u−v| and multiply it with the trainable weight. 2. Regression Objective Function: The cosinesimilarity between the two sentence embeddings u and v is computed, then use mean-squared-error loss as the objective function. 
+### Step 1: Create a Conda Environment
+Run the following command to create a Conda environment with Python 3.8:
+```sh
+conda create -n myenv python=3.8
+```
 
- ##Task 3:
- 1. If the entire network should be frozen: we do evaluation in this senario. Because the parameters of the network will not change at this setting, we can eval how good is our model without worrying loss the current weight.
- 2. If only the transformer backbone should be frozen:
- 3. If only one of the task-specific heads (either for Task A or Task B) should be frozen.
-    Transfer learning can benefit our work a lot because there are a lot of open-source pre-trained transformer models for language tasks in various sizes. To enable transfer learning, firstly we need to decide the size of our model (depends on the size of our dataset, the complexity of the problem we got to solve.) After we select a pre-trained model, depending on the computation resource, we can choose from frozen all the layer except our task heads, frozen most of the layers except last few layers or frozen none of them. In general, frozen most of the layers except last few layers would be a good choice which is both efficient and effective, but if we have unlimited computational resource, fine-tuned the whole network can give us a very good result.
+### Step 2: Install Dependencies
+After creating the environment, install the required dependencies by running:
+```sh
+pip install -r requirements.txt
+```
 
-##Task 4:
- Code can be found at train.py. A small amount of data is loaded by customized dataloader for demo purpose. 
+### Step 3: Train the Model
+Once all packages are installed, you can start training the model using:
+```sh
+python train.py
+```
+
+## Task 1: Sentence BERT Implementation
+- The implementation of Sentence BERT can be found in `BERT.py`.
+- The model structure is similar to the original Transformer but includes an additional average pooling layer at the end.
+- This pooling layer converts variable-length token embeddings into a single sentence embedding while maintaining the same dimension.
+- The hyperparameters follow those used in [this paper](https://arxiv.org/pdf/1810.04805) on BERT-based models.
+
+## Task 2: Multi-Task Model Implementation
+- The code for this task can be found in `multi_task_output.py`.
+- The forward pass is modified to include two objective functions:
+  1. **Classification Objective Function**: Sentence embeddings `u` and `v` are concatenated along with their element-wise absolute difference `|u − v|`. The resulting vector is then multiplied with a trainable weight.
+  2. **Regression Objective Function**: Computes the cosine similarity between sentence embeddings `u` and `v`, using mean-squared error (MSE) loss as the objective function.
+
+## Task 3: Transfer Learning and Model Freezing Strategies
+We consider different scenarios for freezing parts of the network:
+1. **Freezing the entire network**: Used for evaluation purposes, ensuring model weights remain unchanged.
+2. **Freezing only the Transformer backbone**: Allows fine-tuning of task-specific layers while keeping the base model stable.
+3. **Freezing only one of the task-specific heads**: This approach enables transfer learning where one task remains fixed while the other adapts to new data.
+
+### Transfer Learning Strategy
+- **Selecting a pre-trained model**: The choice depends on dataset size and task complexity.
+- **Freezing layers**:
+  - Freezing all layers except task heads is efficient and effective.
+  - Freezing most layers except the last few provides a balance between efficiency and flexibility.
+  - Fine-tuning the entire model yields the best results if computational resources allow.
+
+## Task 4: Training and Data Loading
+- The training process is implemented in `train.py`.
+- A small dataset is loaded using a customized data loader for demonstration purposes.
+
+## Summary
+This project provides a modular implementation of Sentence-BERT with a multi-task objective. The model supports classification and regression tasks while allowing different transfer learning strategies to improve performance. The training setup ensures flexibility for various applications.
+
+For further details, please refer to the respective Python files in the repository.
+
