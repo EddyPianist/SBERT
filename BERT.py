@@ -5,7 +5,6 @@ import math
 
 ###TASK ONE: Sentence Transformer Implementation
 
-#most of the implementations are following the Sentence BERT (SBERT)
 #implement basic componets for transformer: 
 #self-attn
 class CausalSelfAttention(nn.Module):
@@ -112,7 +111,7 @@ class SBERT(nn.Module):
         
         x = self.transformer.ln_f(x)
         x = x.transpose(2, 1)
-        ste_embd = self.pooling(x)              #different from traditional transformer, we use a pooling operation to get sentence embedding
+        ste_embd = self.pooling(x)              #different from traditional transformer, we use a pooling operation to get a fixed size sentence embedding
         ste_embd = ste_embd.squeeze(-1)
         
         return ste_embd
